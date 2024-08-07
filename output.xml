@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <company>
     <employee id="1">
         <firstname>John</firstname>
@@ -8,6 +8,11 @@
     <employee id="2">
         <firstname>Jane</firstname>
         <lastname>Smith</lastname>
-        <department>Marketing</department>
+        <department>Sales</department>
+    </employee>
+    <employee id="3">
+        <firstname>Michael</firstname>
+        <lastname>Johnson</lastname>
+        <department>HR</department>
     </employee>
 </company>
