@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<company>
+    <employee id="1">
+        <firstname>John</firstname>
+        <lastname>Doe</lastname>
+        <department>Engineering</department>
+    </employee>
+    <employee id="2">
+        <firstname>Jane</firstname>
+        <lastname>Smith</lastname>
+        <department>Marketing</department>
+    </employee>
+</company>
