@@ -12,43 +12,54 @@ public class SAXExample {
         try {
             // SAXParserFactory 생성
             SAXParserFactory factory = SAXParserFactory.newInstance();
-
-            // SAXParser 생성
             SAXParser saxParser = factory.newSAXParser();
 
-            // 핸들러 설정
+            // 사용자 정의 핸들러 설정
             DefaultHandler handler = new DefaultHandler() {
                 boolean bFirstName = false;
                 boolean bLastName = false;
+                boolean bDepartment = false;
 
+                // startElement() 메소드 재정의
+                @Override
                 public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-                    System.out.println("Start Element :" + qName);
-                    if (qName.equalsIgnoreCase("FIRSTNAME")) {
+                    System.out.println("Start Element: " + qName);
+                    if (qName.equalsIgnoreCase("employee")) {
+                        String id = attributes.getValue("id");
+                        System.out.println("Employee ID: " + id);
+                    } else if (qName.equalsIgnoreCase("firstname")) {
                         bFirstName = true;
-                    }
-                    if (qName.equalsIgnoreCase("LASTNAME")) {
+                    } else if (qName.equalsIgnoreCase("lastname")) {
                         bLastName = true;
+                    } else if (qName.equalsIgnoreCase("department")) {
+                        bDepartment = true;
                     }
                 }
 
+                // endElement() 메소드 재정의
+                @Override
                 public void endElement(String uri, String localName, String qName) throws SAXException {
-                    System.out.println("End Element :" + qName);
+                    System.out.println("End Element: " + qName);
                 }
 
+                // characters() 메소드 재정의
+                @Override
                 public void characters(char ch[], int start, int length) throws SAXException {
                     if (bFirstName) {
-                        System.out.println("First Name : " + new String(ch, start, length));
+                        System.out.println("First Name: " + new String(ch, start, length));
                         bFirstName = false;
-                    }
-                    if (bLastName) {
-                        System.out.println("Last Name : " + new String(ch, start, length));
+                    } else if (bLastName) {
+                        System.out.println("Last Name: " + new String(ch, start, length));
                         bLastName = false;
+                    } else if (bDepartment) {
+                        System.out.println("Department: " + new String(ch, start, length));
+                        bDepartment = false;
                     }
                 }
             };
 
             // XML 파일 파싱
-            saxParser.parse(new File("C:/input.xml"), handler);
+            saxParser.parse(new File("input.xml"), handler);
         } catch (Exception e) {
             e.printStackTrace();
         }

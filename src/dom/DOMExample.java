@@ -1,21 +1,35 @@
-package sax;
+package dom;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import java.io.File;
-import javax.xml.transform.TransformerFactory;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.io.File;
 
+/**
+    현재 이 코드는 DOM의 주요 기능 특징중 3가지를 구현한 코드임
+       1. 트리 구조 파싱:
+            - DocumentBuilderFactory와 DocumentBuilder를
+            사용하여 XML 문서를 파싱하고 DOM 트리로 변환
+            - XML 문서의 루트 요소와 그 하위 요소들을 트리 구조로 메모리에 로드
+       2. 문서 조작 및 수정:
+            - 새로운 employee 요소를 생성하고 속성과 하위 요소를 추가
+            - 기존 employee 요소의 department 값을 수정
+       3. 문서 탐색:
+            - getElementsByTagName 메소드를 사용하여
+              특정 태그 이름을 가진 모든 요소를 찾고, 루프를 통해 각 요소에 접근했습니다
+ */
 public class DOMExample {
     public static void main(String[] args) {
         try {
             // XML 파일 로드 및 파싱
-            File inputFile = new File("C:/input.xml");
+            File inputFile = new File("input.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);
